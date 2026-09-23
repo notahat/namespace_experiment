@@ -4,3 +4,8 @@ enforce_dependencies: true
 # from.
 dependencies:
   - "."
+
+metadata:
+  # Everything under app/ is placed in the Catalog namespace by
+  # automatic_namespaces, so app/models/book.rb defines Catalog::Book.
+  automatic_pack_namespace: true

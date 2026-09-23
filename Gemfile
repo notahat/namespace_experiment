@@ -66,3 +66,5 @@ group :test do
 end
 
 gem "packs-rails", "~> 0.1.0"
+
+gem "automatic_namespaces", "~> 1.0"
