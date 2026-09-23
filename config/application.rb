@@ -6,6 +6,11 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Gives packs automatic, reloadable namespaces. Required here rather than
+# autoloaded because it registers a Railtie, which has to exist before the
+# application boots.
+require_relative "../lib/pack_namespaces"
+
 module NamespaceExperiment
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -14,7 +19,7 @@ module NamespaceExperiment
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks pack_namespaces.rb])
+    config.autoload_lib(ignore: %w[assets tasks pack_namespaces pack_namespaces.rb])
 
     # Configuration for the application, engines, and railties goes here.
     #

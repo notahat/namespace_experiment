@@ -2,9 +2,9 @@
 # https://github.com/Shopify/packwerk/blob/main/USAGE.md#configuring-packwerk
 
 # Maps pack app directories to their namespaces so constant resolution
-# matches the Zeitwerk setup in config/initializers/pack_namespaces.rb.
+# matches the Zeitwerk setup in lib/pack_namespaces/railtie.rb.
 require:
-  - ./config/packwerk/pack_namespaces
+  - ./lib/pack_namespaces/packwerk
 
 # List of patterns for folder paths to include
 # include:

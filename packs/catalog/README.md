@@ -16,11 +16,16 @@ and it reloads in development like any other constant.
 
 Files under `app/` sit directly in the namespace without a `catalog/`
 subdirectory, so `app/models/book.rb` defines `Catalog::Book`. The pack opts
-in to this with `automatic_pack_namespace: true` in its `package.yml`; the
-rules live in `lib/pack_namespaces.rb` and are applied to Zeitwerk by
-`config/initializers/pack_namespaces.rb`. Helpers, views, assets and
-JavaScript are left un-namespaced. `config/packwerk/pack_namespaces.rb`
-teaches packwerk the same mapping.
+in to this with `automatic_pack_namespace: true` in its `package.yml`. The
+rules live in `lib/pack_namespaces/layout.rb`, a Railtie in
+`lib/pack_namespaces/railtie.rb` applies them to Zeitwerk, and
+`lib/pack_namespaces/packwerk.rb` teaches packwerk the same mapping. Helpers,
+views, assets and JavaScript are left un-namespaced.
+
+To use this in another application, copy `lib/pack_namespaces.rb` and
+`lib/pack_namespaces/`, require the former from `config/application.rb`, add
+both to the `autoload_lib` ignore list, and point `packwerk.yml`'s `require`
+at the packwerk file.
 
 For a pack nested in a grouping folder, and for a pack that doesn't opt in,
 see `packs/inventory/warehouses` and `packs/legacy`.

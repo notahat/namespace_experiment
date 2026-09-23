@@ -1,8 +1,8 @@
 require "test_helper"
 require "tmpdir"
 
-# Covers lib/pack_namespaces.rb as applied by
-# config/initializers/pack_namespaces.rb, using the packs in the repository as
+# Covers lib/pack_namespaces/layout.rb as applied by
+# lib/pack_namespaces/railtie.rb, using the packs in the repository as
 # examples. Asking the autoloader which constant it expects a file to define
 # proves the mapping without depending on what any particular file contains.
 class PackNamespacesTest < ActiveSupport::TestCase
