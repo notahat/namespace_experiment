@@ -1,0 +1,6 @@
+enforce_dependencies: true
+
+# The root package provides ApplicationRecord, which every model here inherits
+# from.
+dependencies:
+  - "."
