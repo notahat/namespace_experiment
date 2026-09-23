@@ -25,6 +25,10 @@ teaches packwerk the same mapping.
 For a pack nested in a grouping folder, and for a pack that doesn't opt in,
 see `packs/inventory/warehouses` and `packs/legacy`.
 
+Where packs live comes from the `pack_paths` setting in `packs.yml`, read
+through the packs gem, so packs can be kept under more than one directory.
+Each fixed leading directory in those patterns becomes an autoload root.
+
 Migrations stay in the application's `db/migrate` directory, since packs-rails
 doesn't add pack directories to the migration path.
 

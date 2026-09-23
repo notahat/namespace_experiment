@@ -1,5 +1,6 @@
 require "test_helper"
 require "packwerk"
+require "constant_resolver"
 
 # Covers config/packwerk/pack_namespaces.rb by loading the project's packwerk
 # configuration, which pulls the extension in through packwerk.yml, and

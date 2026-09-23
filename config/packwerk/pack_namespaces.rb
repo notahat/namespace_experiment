@@ -4,11 +4,11 @@
 #
 # Packwerk maps files to constant names by camelizing each file's path
 # relative to a Zeitwerk root directory. It doesn't understand collapsed
-# directories or nsfiles, so with packs/ as a single root it would believe
+# directories or nsfiles, so with packs/ as an autoload root it would believe
 # packs/catalog/app/models/book.rb defines Packs::Catalog::App::Models::Book.
 # This file fixes that in two places:
 #
-# - PackNamespaceLoadPaths replaces the packs/ root with one load path per
+# - PackNamespaceLoadPaths replaces each pack root with one load path per
 #   namespaced app directory, each mapped to its pack's namespace, so packwerk
 #   sees Catalog::Book.
 # - PackNamespaceFiles adds each namespaced pack's ns.rb to the resolver's
@@ -22,13 +22,19 @@ require_relative "../../lib/pack_namespaces"
 
 # Overrides Packwerk::Configuration#load_paths. See the file comment.
 module PackNamespaceLoadPaths
-  # Returns packwerk's Rails-derived load paths with the packs/ root swapped
+  # Returns packwerk's Rails-derived load paths with the pack roots swapped
   # for namespaced per-pack app directories.
   def load_paths
-    @load_paths ||= super.reject { |path, _| path == PackNamespaces::PACKS_DIRECTORY }.merge(pack_load_paths)
+    @load_paths ||= super.reject { |path, _| pack_roots.include?(path) }.merge(pack_load_paths)
   end
 
   private
+
+  # Returns the pack roots as packwerk names load paths: relative to the
+  # project root, as strings.
+  def pack_roots
+    PackNamespaces.pack_roots.map(&:to_s)
+  end
 
   # Returns a hash from each namespaced app directory, relative to the project
   # root, to the namespace module its files define constants in.

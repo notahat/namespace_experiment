@@ -31,6 +31,30 @@ class PackNamespacesTest < ActiveSupport::TestCase
     assert_equal "LegacyReport", expected_constant_for("packs/legacy/app/models/legacy_report.rb")
   end
 
+  test "the default pack paths put every pack under one root" do
+    assert_equal [ Pathname("packs") ], PackNamespaces.pack_roots([ "packs/*", "packs/*/*" ])
+  end
+
+  test "each distinct fixed prefix of the pack paths becomes a root" do
+    assert_equal [ Pathname("packs"), Pathname("components") ], PackNamespaces.pack_roots([ "packs/*", "components/*" ])
+  end
+
+  test "a root inside another root is folded into the outer one" do
+    assert_equal [ Pathname("packs") ], PackNamespaces.pack_roots([ "packs/*", "packs/domain/*" ])
+  end
+
+  test "a pack path naming a single pack is rooted at the pack's parent" do
+    assert_equal [ Pathname("packs") ], PackNamespaces.pack_roots([ "packs/catalog" ])
+  end
+
+  test "refuses a pack path with no fixed leading directory" do
+    assert_raises(PackNamespaces::InvalidPackPathError) { PackNamespaces.pack_roots([ "*/packs/*" ]) }
+  end
+
+  test "refuses the application root as a pack path" do
+    assert_raises(PackNamespaces::InvalidPackPathError) { PackNamespaces.pack_roots([ "." ]) }
+  end
+
   test "refuses a namespaced pack inside another namespaced pack" do
     Dir.mktmpdir do |root|
       outer = namespaced_pack_at(root, "packs/outer")
