@@ -1,0 +1,7 @@
+enforce_dependencies: true
+
+metadata:
+  # Everything under app/ lives in the Warehouses namespace. The inventory
+  # folder above this pack is just for grouping and adds nothing to the name.
+  # See lib/pack_namespaces.rb.
+  automatic_pack_namespace: true

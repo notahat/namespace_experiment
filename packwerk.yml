@@ -1,6 +1,11 @@
 # See: Setting up the configuration file
 # https://github.com/Shopify/packwerk/blob/main/USAGE.md#configuring-packwerk
 
+# Maps pack app directories to their namespaces so constant resolution
+# matches the Zeitwerk setup in config/initializers/pack_namespaces.rb.
+require:
+  - ./config/packwerk/pack_namespaces
+
 # List of patterns for folder paths to include
 # include:
 # - "**/*.{rb,rake,erb}"

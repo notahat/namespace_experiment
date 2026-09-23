@@ -1,0 +1,4 @@
+enforce_dependencies: true
+
+# This pack doesn't opt in to automatic namespacing, so its constants are
+# top-level, exactly as packs-rails loads them on its own.

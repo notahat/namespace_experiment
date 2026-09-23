@@ -6,6 +6,6 @@ dependencies:
   - "."
 
 metadata:
-  # Everything under app/ is placed in the Catalog namespace by
-  # automatic_namespaces, so app/models/book.rb defines Catalog::Book.
+  # Everything under app/ lives in the Catalog namespace, defined in ns.rb.
+  # See lib/pack_namespaces.rb.
   automatic_pack_namespace: true
