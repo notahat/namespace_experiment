@@ -65,4 +65,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "packs-rails", "~> 0.1.0"
+gem "packs-rails", "~> 0.1.1"
